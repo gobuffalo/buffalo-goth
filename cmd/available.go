@@ -15,6 +15,7 @@ var availableCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		plugs := plugins.Commands{
 			{Name: gothCmd.Use, BuffaloCommand: "generate", Description: gothCmd.Short, Aliases: []string{}},
+			{Name: gothAuthCmd.Use, BuffaloCommand: "generate", Description: gothAuthCmd.Short, Aliases: []string{}},
 		}
 		return json.NewEncoder(os.Stdout).Encode(plugs)
 	},
