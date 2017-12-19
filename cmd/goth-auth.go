@@ -1,10 +1,6 @@
 package cmd
 
 import (
-	"os"
-	"path/filepath"
-	"strings"
-
 	"github.com/pkg/errors"
 
 	"github.com/gobuffalo/buffalo-goth/auth"
@@ -22,40 +18,17 @@ var gothAuthCmd = &cobra.Command{
 			return errors.New("you must specify at least one provider")
 		}
 
-		pwd, err := os.Getwd()
-		if err != nil {
-			return errors.WithStack(err)
-		}
-
 		g, err := auth.New()
 		if err != nil {
 			return err
 		}
 		return g.Run(".", makr.Data{
 			"providers":   args,
-			"packagePath": packagePath(pwd),
+			"packagePath": envy.CurrentPackage(),
 		})
 	},
 }
 
-func goPath(root string) string {
-	gpMultiple := envy.GoPaths()
-	path := ""
-
-	for i := 0; i < len(gpMultiple); i++ {
-		if strings.HasPrefix(root, filepath.Join(gpMultiple[i], "src")) {
-			path = gpMultiple[i]
-			break
-		}
-	}
-	return path
-}
-
-func packagePath(rootPath string) string {
-	gosrcpath := strings.Replace(filepath.Join(goPath(rootPath), "src"), "\\", "/", -1)
-	rootPath = strings.Replace(rootPath, "\\", "/", -1)
-	return strings.Replace(rootPath, gosrcpath+"/", "", 2)
-}
 func init() {
 	RootCmd.AddCommand(gothAuthCmd)
 }
