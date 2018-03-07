@@ -10,7 +10,7 @@ import (
 // New actions/auth.go file configured to the specified providers.
 func New() (*makr.Generator, error) {
 	g := makr.New()
-	files, err := generators.Find(filepath.Join("github.com", "gobuffalo", "buffalo-goth", "goth"))
+	files, err := generators.FindByBox(filepath.Join("github.com", "gobuffalo", "buffalo-goth", "goth"))
 	if err != nil {
 		return nil, err
 	}
