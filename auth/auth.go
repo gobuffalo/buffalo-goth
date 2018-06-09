@@ -6,12 +6,13 @@ import (
 
 	"github.com/gobuffalo/buffalo/generators"
 	"github.com/gobuffalo/makr"
+	"github.com/gobuffalo/packr"
 )
 
 // New actions/auth.go file configured to the specified providers.
 func New() (*makr.Generator, error) {
 	g := makr.New()
-	files, err := generators.Find(filepath.Join("github.com", "gobuffalo", "buffalo-goth", "auth"))
+	files, err := generators.FindByBox(packr.NewBox("../auth/templates"))
 	if err != nil {
 		return nil, err
 	}
