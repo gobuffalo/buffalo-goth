@@ -10,6 +10,14 @@ $ go get -u github.com/gobuffalo/buffalo-goth
 
 ## Usage
 
+Generate Users, Routes
+
+```bash
+$ buffalo generate goth-auth facebook twitter linkedin etc...
+```
+
+Generate Routes only
+
 ```bash
 $ buffalo generate goth facebook twitter linkedin etc...
 ```
