@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"fmt"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -16,7 +15,6 @@ func Test_Auth(t *testing.T) {
 
 	run := genny.DryRunner(context.Background())
 	g := genny.New()
-	fmt.Println("### appBefore ->", appBefore)
 	g.File(genny.NewFile(filepath.Join("actions", "app.go"), strings.NewReader(appBefore)))
 	run.With(g)
 

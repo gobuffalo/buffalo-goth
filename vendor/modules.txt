@@ -6,7 +6,7 @@ github.com/gobuffalo/buffalo/meta
 github.com/gobuffalo/buffalo-plugins/plugins
 # github.com/gobuffalo/envy v1.6.4
 github.com/gobuffalo/envy
-# github.com/gobuffalo/genny v0.0.0-20180820191204-ad69a5a4ead2
+# github.com/gobuffalo/genny v0.0.0-20180820212833-cd06b5d93806
 github.com/gobuffalo/genny
 github.com/gobuffalo/genny/movinglater/gotools
 github.com/gobuffalo/genny/movinglater/gotools/goimports
@@ -36,7 +36,7 @@ golang.org/x/crypto/ssh/terminal
 # golang.org/x/sys v0.0.0-20180820145501-1a700e749ce2
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/tools v0.0.0-20180820180505-7395529d1659
+# golang.org/x/tools v0.0.0-20180820211100-c1406c36efe2
 golang.org/x/tools/imports
 golang.org/x/tools/go/ast/astutil
 golang.org/x/tools/internal/fastwalk

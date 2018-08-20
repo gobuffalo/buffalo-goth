@@ -20,7 +20,7 @@ var generateOptions = struct {
 // generateCmd represents the generate command
 var generateCmd = &cobra.Command{
 	Use:   "goth",
-	Short: "generates a new goth",
+	Short: "generates a actions/auth.go file configured to the specified providers.",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		r := genny.WetRunner(context.Background())
 
