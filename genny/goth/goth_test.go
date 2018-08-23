@@ -6,6 +6,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/genny"
 	"github.com/stretchr/testify/require"
 )
@@ -39,7 +40,7 @@ func Test_Goth(t *testing.T) {
 
 	r.Len(res.Commands, 1)
 	c := res.Commands[0]
-	r.Equal("go get github.com/markbates/goth/...", strings.Join(c.Args, " "))
+	r.Equal(envy.Get("GO_BIN", "go")+" get github.com/markbates/goth", strings.Join(c.Args, " "))
 
 }
 

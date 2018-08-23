@@ -58,7 +58,7 @@ func New(opts *Options) (*genny.Generator, error) {
 		return r.File(f)
 	})
 
-	g.Command(exec.Command(genny.GoBin(), "get", "github.com/markbates/goth/..."))
+	g.Command(exec.Command(genny.GoBin(), "get", "github.com/markbates/goth"))
 
 	return g, nil
 }

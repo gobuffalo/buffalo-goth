@@ -6,6 +6,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/gobuffalo/envy"
 	"github.com/gobuffalo/genny"
 	"github.com/stretchr/testify/require"
 )
@@ -37,7 +38,7 @@ func Test_Auth(t *testing.T) {
 	r.Len(res.Commands, 2)
 
 	c := res.Commands[0]
-	r.Equal("go get github.com/markbates/goth/...", strings.Join(c.Args, " "))
+	r.Equal(envy.Get("GO_BIN", "go")+" get github.com/markbates/goth", strings.Join(c.Args, " "))
 
 	c = res.Commands[1]
 	r.Equal("buffalo db generate model user name email:nulls.String provider provider_id", strings.Join(c.Args, " "))
