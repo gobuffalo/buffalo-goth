@@ -2,11 +2,11 @@
 github.com/davecgh/go-spew/spew
 # github.com/gobuffalo/buffalo v0.12.6
 github.com/gobuffalo/buffalo/meta
-# github.com/gobuffalo/buffalo-plugins v0.0.0-20180823133541-8b52c8db1af5
+# github.com/gobuffalo/buffalo-plugins v0.0.0-20180823153124-4e86bafb6c76
 github.com/gobuffalo/buffalo-plugins/plugins
 # github.com/gobuffalo/envy v1.6.4
 github.com/gobuffalo/envy
-# github.com/gobuffalo/genny v0.0.0-20180823133812-bbbdc08c1eaf
+# github.com/gobuffalo/genny v0.0.0-20180823134419-80135003197d
 github.com/gobuffalo/genny
 github.com/gobuffalo/genny/movinglater/gotools
 github.com/gobuffalo/genny/movinglater/gotools/gomods
@@ -34,10 +34,10 @@ github.com/stretchr/testify/require
 github.com/stretchr/testify/assert
 # golang.org/x/crypto v0.0.0-20180820150726-614d502a4dac
 golang.org/x/crypto/ssh/terminal
-# golang.org/x/sys v0.0.0-20180821140842-3b58ed4ad339
+# golang.org/x/sys v0.0.0-20180823144017-11551d06cbcc
 golang.org/x/sys/unix
 golang.org/x/sys/windows
-# golang.org/x/tools v0.0.0-20180822150542-447b503c8ba6
+# golang.org/x/tools v0.0.0-20180823152632-ba93f9405e54
 golang.org/x/tools/imports
 golang.org/x/tools/go/ast/astutil
 golang.org/x/tools/internal/fastwalk
