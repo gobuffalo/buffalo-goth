@@ -8,6 +8,7 @@ import (
 
 	"github.com/gobuffalo/genny"
 	"github.com/gobuffalo/genny/movinglater/gotools"
+	"github.com/gobuffalo/genny/movinglater/gotools/gomods"
 	"github.com/gobuffalo/packr"
 	"github.com/pkg/errors"
 )
@@ -58,7 +59,11 @@ func New(opts *Options) (*genny.Generator, error) {
 		return r.File(f)
 	})
 
-	g.Command(exec.Command(genny.GoBin(), "get", "github.com/markbates/goth"))
+	pkg := "github.com/markbates/goth"
+	if !gomods.On() {
+		pkg += "/..."
+	}
+	g.Command(exec.Command(genny.GoBin(), "get", pkg))
 
 	return g, nil
 }

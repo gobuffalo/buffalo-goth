@@ -2,15 +2,16 @@
 github.com/davecgh/go-spew/spew
 # github.com/gobuffalo/buffalo v0.12.6
 github.com/gobuffalo/buffalo/meta
-# github.com/gobuffalo/buffalo-plugins v0.0.0-20180820141205-03ceb944b112
+# github.com/gobuffalo/buffalo-plugins v0.0.0-20180823133541-8b52c8db1af5
 github.com/gobuffalo/buffalo-plugins/plugins
 # github.com/gobuffalo/envy v1.6.4
 github.com/gobuffalo/envy
-# github.com/gobuffalo/genny v0.0.0-20180823115434-22bd8ce27d42
+# github.com/gobuffalo/genny v0.0.0-20180823133812-bbbdc08c1eaf
 github.com/gobuffalo/genny
 github.com/gobuffalo/genny/movinglater/gotools
+github.com/gobuffalo/genny/movinglater/gotools/gomods
 github.com/gobuffalo/genny/movinglater/gotools/goimports
-# github.com/gobuffalo/packr v1.13.2
+# github.com/gobuffalo/packr v1.13.3
 github.com/gobuffalo/packr
 # github.com/inconshreveable/mousetrap v1.0.0
 github.com/inconshreveable/mousetrap
