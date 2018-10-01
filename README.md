@@ -2,6 +2,7 @@
 
 <p align="center">
 <a href="https://godoc.org/github.com/gobuffalo/buffalo-goth"><img src="https://godoc.org/github.com/gobuffalo/buffalo-goth?status.svg" alt="GoDoc" /></a>
+<a href="https://travis-ci.org/gobuffalo/buffalo-goth"><img src="https://travis-ci.org/gobuffalo/buffalo-goth.svg?branch=master" alt="Build Status" /></a>
 <a href="https://goreportcard.com/report/github.com/gobuffalo/buffalo-goth"><img src="https://goreportcard.com/badge/github.com/gobuffalo/buffalo-goth" alt="Go Report Card" /></a>
 </p>
 
