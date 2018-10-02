@@ -1,7 +1,7 @@
 module github.com/gobuffalo/buffalo-goth
 
 require (
-	github.com/gobuffalo/buffalo v0.12.6
+	github.com/gobuffalo/buffalo v0.13.0-rc.1.0.20181001193643-c5177460e647
 	github.com/gobuffalo/buffalo-plugins v0.0.0-20180928194818-6ca7684eb375
 	github.com/gobuffalo/genny v0.0.0-20181002191825-3679ba2601ef
 	github.com/gobuffalo/packr v1.13.7
