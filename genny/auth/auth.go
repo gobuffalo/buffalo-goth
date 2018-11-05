@@ -8,9 +8,9 @@ import (
 	"text/template"
 
 	"github.com/gobuffalo/buffalo-goth/genny/goth"
-	"github.com/gobuffalo/buffalo/meta"
 	"github.com/gobuffalo/genny"
 	"github.com/gobuffalo/genny/movinglater/gotools"
+	"github.com/gobuffalo/meta"
 	"github.com/gobuffalo/packr"
 	"github.com/pkg/errors"
 )
