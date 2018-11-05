@@ -5,6 +5,8 @@ github.com/gobuffalo/buffalo-goth does not try to reinvent the wheel! Instead, i
 Thank you to the following **GIANTS**:
 
 
+* [github.com/BurntSushi/toml](https://godoc.org/github.com/BurntSushi/toml)
+
 * [github.com/gobuffalo/buffalo-goth](https://godoc.org/github.com/gobuffalo/buffalo-goth)
 
 * [github.com/gobuffalo/buffalo-goth/cmd](https://godoc.org/github.com/gobuffalo/buffalo-goth/cmd)
@@ -17,9 +19,15 @@ Thank you to the following **GIANTS**:
 
 * [github.com/gobuffalo/buffalo-plugins/plugins](https://godoc.org/github.com/gobuffalo/buffalo-plugins/plugins)
 
-* [github.com/gobuffalo/buffalo/meta](https://godoc.org/github.com/gobuffalo/buffalo/meta)
+* [github.com/gobuffalo/buffalo-plugins/plugins/plugdeps](https://godoc.org/github.com/gobuffalo/buffalo-plugins/plugins/plugdeps)
 
 * [github.com/gobuffalo/envy](https://godoc.org/github.com/gobuffalo/envy)
+
+* [github.com/gobuffalo/events](https://godoc.org/github.com/gobuffalo/events)
+
+* [github.com/gobuffalo/flect](https://godoc.org/github.com/gobuffalo/flect)
+
+* [github.com/gobuffalo/flect/name](https://godoc.org/github.com/gobuffalo/flect/name)
 
 * [github.com/gobuffalo/genny](https://godoc.org/github.com/gobuffalo/genny)
 
@@ -29,13 +37,23 @@ Thank you to the following **GIANTS**:
 
 * [github.com/gobuffalo/genny/movinglater/gotools/gomods](https://godoc.org/github.com/gobuffalo/genny/movinglater/gotools/gomods)
 
+* [github.com/gobuffalo/logger](https://godoc.org/github.com/gobuffalo/logger)
+
+* [github.com/gobuffalo/mapi](https://godoc.org/github.com/gobuffalo/mapi)
+
+* [github.com/gobuffalo/meta](https://godoc.org/github.com/gobuffalo/meta)
+
+* [github.com/gobuffalo/packd](https://godoc.org/github.com/gobuffalo/packd)
+
 * [github.com/gobuffalo/packr](https://godoc.org/github.com/gobuffalo/packr)
 
 * [github.com/joho/godotenv](https://godoc.org/github.com/joho/godotenv)
 
-* [github.com/markbates/inflect](https://godoc.org/github.com/markbates/inflect)
+* [github.com/karrick/godirwalk](https://godoc.org/github.com/karrick/godirwalk)
 
 * [github.com/markbates/oncer](https://godoc.org/github.com/markbates/oncer)
+
+* [github.com/markbates/safe](https://godoc.org/github.com/markbates/safe)
 
 * [github.com/pkg/errors](https://godoc.org/github.com/pkg/errors)
 
@@ -54,3 +72,5 @@ Thank you to the following **GIANTS**:
 * [golang.org/x/tools/imports](https://godoc.org/golang.org/x/tools/imports)
 
 * [golang.org/x/tools/internal/fastwalk](https://godoc.org/golang.org/x/tools/internal/fastwalk)
+
+* [golang.org/x/tools/internal/gopathwalk](https://godoc.org/golang.org/x/tools/internal/gopathwalk)
