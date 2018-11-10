@@ -2,7 +2,6 @@ package goth
 
 import (
 	"os/exec"
-	"path/filepath"
 	"strings"
 	"text/template"
 
@@ -35,7 +34,7 @@ func New(opts *Options) (*genny.Generator, error) {
 	g.Transformer(t)
 
 	g.RunFn(func(r *genny.Runner) error {
-		path := filepath.Join("actions", "app.go")
+		path := "actions/app.go"
 
 		f, err := r.FindFile(path)
 		if err != nil {
