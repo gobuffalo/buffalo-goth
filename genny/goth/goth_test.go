@@ -2,7 +2,6 @@ package goth
 
 import (
 	"context"
-	"path/filepath"
 	"strings"
 	"testing"
 
@@ -16,7 +15,7 @@ func Test_Goth(t *testing.T) {
 
 	run := genny.DryRunner(context.Background())
 	g := genny.New()
-	g.File(genny.NewFile(filepath.Join("actions", "app.go"), strings.NewReader(appBefore)))
+	g.File(genny.NewFile("actions/app.go", strings.NewReader(appBefore)))
 	run.With(g)
 
 	g, err := New(&Options{
