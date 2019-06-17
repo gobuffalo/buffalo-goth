@@ -30,4 +30,4 @@ Generate Routes only
 $ buffalo generate goth facebook twitter linkedin etc...
 ```
 
-For more detailed usage visit [https://gobuffalo.io/docs/generators#goth](https://gobuffalo.io/docs/generators#goth).
+For more detailed usage visit [https://gobuffalo.io/en/docs/goth/](https://gobuffalo.io/en/docs/goth/).
