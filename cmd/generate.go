@@ -5,7 +5,7 @@ import (
 
 	"github.com/gobuffalo/buffalo-goth/genny/goth"
 	"github.com/gobuffalo/genny"
-	"github.com/gobuffalo/genny/movinglater/gotools"
+	"github.com/gobuffalo/gogen"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
@@ -36,7 +36,7 @@ var generateCmd = &cobra.Command{
 		}
 		r.With(g)
 
-		g, err = gotools.GoFmt(r.Root)
+		g, err = gogen.Fmt(r.Root)
 		if err != nil {
 			return errors.WithStack(err)
 		}
