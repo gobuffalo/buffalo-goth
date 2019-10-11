@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	genny2 "github.com/gobuffalo/buffalo-goth/genny"
 	"github.com/gobuffalo/genny"
 	"github.com/gobuffalo/genny/gogen/gomods"
 	"github.com/stretchr/testify/require"
@@ -31,11 +32,11 @@ func Test_Goth(t *testing.T) {
 
 	f := res.Files[0]
 	r.Equal("actions/app.go", f.Name())
-	r.Equal(appAfter, f.String())
+	r.Equal(genny2.NormalizeNewlines(appAfter), genny2.NormalizeNewlines(f.String()))
 
 	f = res.Files[1]
 	r.Equal("actions/auth.go", f.Name())
-	r.Equal(authAfter, f.String())
+	r.Equal(genny2.NormalizeNewlines(authAfter), genny2.NormalizeNewlines(f.String()))
 
 	r.Len(res.Commands, 1)
 	c := res.Commands[0]
