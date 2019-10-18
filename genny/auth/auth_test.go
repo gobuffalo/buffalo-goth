@@ -5,10 +5,20 @@ import (
 	"strings"
 	"testing"
 
-	genny2 "github.com/gobuffalo/buffalo-goth/genny"
 	"github.com/gobuffalo/genny"
 	"github.com/stretchr/testify/require"
 )
+
+/**
+ * Source: https://www.programming-books.io/essential/go/normalize-newlines-1d3abcf6f17c4186bb9617fa14074e48
+ */
+func NormalizeNewlines(d string) string {
+	// replace CR LF \r\n (windows) with LF \n (unix)
+	d = strings.ReplaceAll(d, string([]byte{13, 10}), string([]byte{10}))
+	// replace CF \r (mac) with LF \n (unix)
+	d = strings.ReplaceAll(d, string([]byte{13}), string([]byte{10}))
+	return d
+}
 
 func Test_Auth(t *testing.T) {
 	r := require.New(t)
@@ -32,7 +42,7 @@ func Test_Auth(t *testing.T) {
 
 	f := res.Files[0]
 	r.Equal("actions/app.go", f.Name())
-	r.Equal(genny2.NormalizeNewlines(appAfter), genny2.NormalizeNewlines(f.String()))
+	r.Equal(NormalizeNewlines(appAfter), NormalizeNewlines(f.String()))
 
 	r.Len(res.Commands, 2)
 
