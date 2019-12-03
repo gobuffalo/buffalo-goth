@@ -5,7 +5,7 @@ import (
 
 	"github.com/gobuffalo/buffalo-goth/genny/goth"
 	"github.com/gobuffalo/genny"
-	"github.com/gobuffalo/gogen"
+	"github.com/gobuffalo/genny/gogen"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )

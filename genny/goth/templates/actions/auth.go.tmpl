@@ -7,22 +7,22 @@ import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
-	{{range .providers -}}
+	{{- range .providers}}
 	"github.com/markbates/goth/providers/{{ downcase . }}"
-  {{end -}}
+	{{- end}}
 )
 
 func init() {
 	gothic.Store = App().SessionStore
 
 	goth.UseProviders(
-	{{range $index, $elem := .providers -}}
-	{{if eq $elem "auth0" -}}
-	{{downcase $elem}}.New(os.Getenv("{{upcase $elem}}_KEY"), os.Getenv("{{upcase $elem}}_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/{{downcase $elem}}/callback"), os.Getenv("{{upcase $elem}}_DOMAIN"), os.Getenv("{{upcase $elem}}_SCOPE")),
-	{{else -}}
-	{{downcase $elem}}.New(os.Getenv("{{upcase $elem}}_KEY"), os.Getenv("{{upcase $elem}}_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/{{downcase $elem}}/callback")),
-	{{end -}}
-	{{end -}}
+		{{- range $index, $elem := .providers}}
+		{{- if eq $elem "auth0"}}
+		{{downcase $elem}}.New(os.Getenv("{{upcase $elem}}_KEY"), os.Getenv("{{upcase $elem}}_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/{{downcase $elem}}/callback"), os.Getenv("{{upcase $elem}}_DOMAIN"), os.Getenv("{{upcase $elem}}_SCOPE")),
+		{{else}}
+		{{downcase $elem}}.New(os.Getenv("{{upcase $elem}}_KEY"), os.Getenv("{{upcase $elem}}_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/{{downcase $elem}}/callback")),
+		{{- end}}
+		{{- end}}
 	)
 }
 

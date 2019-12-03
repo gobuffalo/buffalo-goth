@@ -10,6 +10,17 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+/**
+ * Source: https://www.programming-books.io/essential/go/normalize-newlines-1d3abcf6f17c4186bb9617fa14074e48
+ */
+func NormalizeNewlines(d string) string {
+	// replace CR LF \r\n (windows) with LF \n (unix)
+	d = strings.ReplaceAll(d, string([]byte{13, 10}), string([]byte{10}))
+	// replace CF \r (mac) with LF \n (unix)
+	d = strings.ReplaceAll(d, string([]byte{13}), string([]byte{10}))
+	return d
+}
+
 func Test_Goth(t *testing.T) {
 	r := require.New(t)
 
@@ -31,11 +42,11 @@ func Test_Goth(t *testing.T) {
 
 	f := res.Files[0]
 	r.Equal("actions/app.go", f.Name())
-	r.Equal(appAfter, f.String())
+	r.Equal(NormalizeNewlines(appAfter), NormalizeNewlines(f.String()))
 
 	f = res.Files[1]
 	r.Equal("actions/auth.go", f.Name())
-	r.Equal(authAfter, f.String())
+	r.Equal(NormalizeNewlines(authAfter), NormalizeNewlines(f.String()))
 
 	r.Len(res.Commands, 1)
 	c := res.Commands[0]
@@ -94,15 +105,15 @@ import (
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/github"
-  "github.com/markbates/goth/providers/twitter"
-  )
+	"github.com/markbates/goth/providers/twitter"
+)
 
 func init() {
 	gothic.Store = App().SessionStore
 
 	goth.UseProviders(
-	github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/github/callback")),
-	twitter.New(os.Getenv("TWITTER_KEY"), os.Getenv("TWITTER_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/twitter/callback")),
+		github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/github/callback")),
+		twitter.New(os.Getenv("TWITTER_KEY"), os.Getenv("TWITTER_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/twitter/callback")),
 	)
 }
 
