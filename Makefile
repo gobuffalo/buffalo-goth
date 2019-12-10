@@ -2,7 +2,7 @@ TAGS ?= "sqlite"
 GO_BIN ?= go
 
 install:
-	packr
+	packr2
 	$(GO_BIN) install -tags ${TAGS} -v ./.
 	make tidy
 
@@ -20,12 +20,12 @@ deps:
 	make tidy
 
 build:
-	packr
+	packr2
 	$(GO_BIN) build -v .
 	make tidy
 
 test:
-	packr
+	packr2
 	$(GO_BIN) test -tags ${TAGS} ./...
 	make tidy
 
