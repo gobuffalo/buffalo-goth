@@ -8,7 +8,7 @@ import (
 
 	"github.com/gobuffalo/buffalo-goth/genny/goth"
 	"github.com/gobuffalo/genny"
-	"github.com/gobuffalo/genny/movinglater/gotools"
+	"github.com/gobuffalo/genny/gogen"
 	"github.com/gobuffalo/meta"
 	"github.com/gobuffalo/packr"
 	"github.com/pkg/errors"
@@ -38,7 +38,7 @@ func New(opts *Options) (*genny.Group, error) {
 		"providers": opts.Providers,
 		"app":       meta.New("."),
 	}
-	t := gotools.TemplateTransformer(data, h)
+	t := gogen.TemplateTransformer(data, h)
 	g.Transformer(t)
 
 	cmd := exec.Command("buffalo", "db", "generate", "model", "user", "name", "email:nulls.String", "provider", "provider_id")

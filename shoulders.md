@@ -31,11 +31,11 @@ Thank you to the following **GIANTS**:
 
 * [github.com/gobuffalo/genny](https://godoc.org/github.com/gobuffalo/genny)
 
-* [github.com/gobuffalo/genny/movinglater/gotools](https://godoc.org/github.com/gobuffalo/genny/movinglater/gotools)
+* [github.com/gobuffalo/genny/gogen](https://godoc.org/github.com/gobuffalo/genny/gogen)
 
-* [github.com/gobuffalo/genny/movinglater/gotools/goimports](https://godoc.org/github.com/gobuffalo/genny/movinglater/gotools/goimports)
+* [github.com/gobuffalo/genny/gogen/goimports](https://godoc.org/github.com/gobuffalo/genny/gogen/goimports)
 
-* [github.com/gobuffalo/genny/movinglater/gotools/gomods](https://godoc.org/github.com/gobuffalo/genny/movinglater/gotools/gomods)
+* [github.com/gobuffalo/genny/gogen/gomods](https://godoc.org/github.com/gobuffalo/genny/gogen/gomods)
 
 * [github.com/gobuffalo/logger](https://godoc.org/github.com/gobuffalo/logger)
 

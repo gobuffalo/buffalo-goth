@@ -6,8 +6,8 @@ import (
 	"text/template"
 
 	"github.com/gobuffalo/genny"
-	"github.com/gobuffalo/genny/movinglater/gotools"
-	"github.com/gobuffalo/genny/movinglater/gotools/gomods"
+	"github.com/gobuffalo/genny/gogen"
+	"github.com/gobuffalo/gogen/gomods"
 	"github.com/gobuffalo/packr"
 	"github.com/pkg/errors"
 )
@@ -30,7 +30,7 @@ func New(opts *Options) (*genny.Generator, error) {
 	data := map[string]interface{}{
 		"providers": opts.Providers,
 	}
-	t := gotools.TemplateTransformer(data, h)
+	t := gogen.TemplateTransformer(data, h)
 	g.Transformer(t)
 
 	g.RunFn(func(r *genny.Runner) error {
@@ -41,7 +41,7 @@ func New(opts *Options) (*genny.Generator, error) {
 			return errors.WithStack(err)
 		}
 
-		f, err = gotools.AddImport(f, "github.com/markbates/goth/gothic")
+		f, err = gogen.AddImport(f, "github.com/markbates/goth/gothic")
 		if err != nil {
 			return errors.WithStack(err)
 		}
@@ -51,7 +51,7 @@ func New(opts *Options) (*genny.Generator, error) {
 			"auth.GET(\"/{provider}\", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))",
 			"auth.GET(\"/{provider}/callback\", AuthCallback)",
 		}
-		f, err = gotools.AddInsideBlock(f, "if app == nil {", expressions...)
+		f, err = gogen.AddInsideBlock(f, "if app == nil {", expressions...)
 		if err != nil {
 			return errors.WithStack(err)
 		}
