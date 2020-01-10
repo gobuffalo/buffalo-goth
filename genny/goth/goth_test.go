@@ -2,12 +2,11 @@ package goth
 
 import (
 	"context"
+	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/gogen/gomods"
+	"github.com/stretchr/testify/require"
 	"strings"
 	"testing"
-
-	"github.com/gobuffalo/genny"
-	"github.com/gobuffalo/genny/gogen/gomods"
-	"github.com/stretchr/testify/require"
 )
 
 func Test_Goth(t *testing.T) {
