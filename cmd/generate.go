@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/gobuffalo/buffalo-goth/genny/goth"
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 	"github.com/gobuffalo/genny/gogen"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"

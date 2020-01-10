@@ -5,9 +5,11 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/gobuffalo/genny"
-	"github.com/gobuffalo/genny/gogen/gomods"
-	"github.com/gobuffalo/genny/gogen"
+	"github.com/gobuffalo/genny/v2"
+	"github.com/gobuffalo/gogen"
+
+	"github.com/gobuffalo/gogen/gomods"
+
 	"github.com/gobuffalo/packr"
 	"github.com/pkg/errors"
 )
@@ -62,7 +64,7 @@ func New(opts *Options) (*genny.Generator, error) {
 	if !gomods.On() {
 		pkg += "/..."
 	}
-	g.Command(exec.Command(genny.GoBin(), "get", pkg))
+	g.Command(exec.Command(packr.GoBin(), "get", pkg))
 
 	return g, nil
 }

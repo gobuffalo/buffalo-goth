@@ -7,7 +7,7 @@ import (
 	"text/template"
 
 	"github.com/gobuffalo/buffalo-goth/genny/goth"
-	"github.com/gobuffalo/genny"
+	"github.com/gobuffalo/genny/v2"
 	"github.com/gobuffalo/genny/gogen"
 	"github.com/gobuffalo/meta"
 	"github.com/gobuffalo/packr"
