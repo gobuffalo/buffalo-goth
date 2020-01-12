@@ -8,6 +8,7 @@ require (
 	github.com/gobuffalo/gogen v0.2.0
 	github.com/gobuffalo/meta v0.2.1
 	github.com/gobuffalo/packr v1.30.1
+	github.com/gobuffalo/packr/v2 v2.7.1
 	github.com/gobuffalo/release v1.15.0 // indirect
 	github.com/karrick/godirwalk v1.14.0 // indirect
 	github.com/kr/pty v1.1.3 // indirect

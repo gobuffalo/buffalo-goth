@@ -5,12 +5,13 @@ import (
 	"strings"
 	"text/template"
 
+	"github.com/gobuffalo/genny/v2/gogen"
 	"github.com/gobuffalo/genny/v2"
-	"github.com/gobuffalo/gogen"
 
 	"github.com/gobuffalo/gogen/gomods"
 
-	"github.com/gobuffalo/packr"
+	"github.com/gobuffalo/packr/v2"
+	"github.com/gobuffalo/packr/v2/jam/store"
 	"github.com/pkg/errors"
 )
 
@@ -21,7 +22,7 @@ func New(opts *Options) (*genny.Generator, error) {
 		return g, errors.New("you must specify at least one provider")
 	}
 
-	if err := g.Box(packr.NewBox("../goth/templates")); err != nil {
+	if err := g.Box(packr.New("github.com/gobuffalo/buffalo-goth/genny/goth", "../goth/templates")); err != nil {
 		return g, errors.WithStack(err)
 	}
 
@@ -32,6 +33,7 @@ func New(opts *Options) (*genny.Generator, error) {
 	data := map[string]interface{}{
 		"providers": opts.Providers,
 	}
+
 	t := gogen.TemplateTransformer(data, h)
 	g.Transformer(t)
 
@@ -64,7 +66,6 @@ func New(opts *Options) (*genny.Generator, error) {
 	if !gomods.On() {
 		pkg += "/..."
 	}
-	g.Command(exec.Command(packr.GoBin(), "get", pkg))
-
+	g.Command(exec.Command(store.GoBin(), "get", pkg))
 	return g, nil
 }
