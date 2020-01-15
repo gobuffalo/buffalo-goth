@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/gobuffalo/buffalo-goth/genny/auth"
-	"github.com/gobuffalo/genny"
-	"github.com/gobuffalo/genny/movinglater/gotools"
+	"github.com/gobuffalo/genny/v2"
+	"github.com/gobuffalo/genny/v2/gogen"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
@@ -36,7 +36,7 @@ var authCmd = &cobra.Command{
 		}
 		gg.With(r)
 
-		g, err := gotools.GoFmt(r.Root)
+		g, err := gogen.Fmt(r.Root)
 		if err != nil {
 			return errors.WithStack(err)
 		}

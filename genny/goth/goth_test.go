@@ -5,8 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/gobuffalo/genny"
-	"github.com/gobuffalo/genny/movinglater/gotools/gomods"
+	"github.com/gobuffalo/genny/v2"
 	"github.com/stretchr/testify/require"
 )
 
@@ -37,13 +36,7 @@ func Test_Goth(t *testing.T) {
 	r.Equal("actions/auth.go", f.Name())
 	r.Equal(authAfter, f.String())
 
-	r.Len(res.Commands, 1)
-	c := res.Commands[0]
-	if gomods.On() {
-		r.Equal(genny.GoBin()+" get github.com/markbates/goth", strings.Join(c.Args, " "))
-	} else {
-		r.Equal(genny.GoBin()+" get github.com/markbates/goth/...", strings.Join(c.Args, " "))
-	}
+	r.Len(res.Commands, 0)
 
 }
 
