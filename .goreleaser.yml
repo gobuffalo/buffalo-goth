@@ -1,10 +1,10 @@
 builds:
   -
-    main: ./cmd/buffalo-goth/main.go
+    main: ./cmd/main.go
     env:
       - CGO_ENABLED=0
     ldflags:
-      - -s -w -X "github.com/gobuffalo/buffalo-goth.Version={{.Tag}}"
+      - -s -w -X "github.com/gobuffalo/buffalo-goth/main.Version={{.Tag}}"
     goos:
       - darwin
       - linux

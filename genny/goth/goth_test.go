@@ -34,7 +34,11 @@ func Test_Goth(t *testing.T) {
 
 	f = res.Files[1]
 	r.Equal("actions/auth.go", f.Name())
-	r.Equal(authAfter, f.String())
+
+	exp := strings.TrimSpace(authAfter)
+	act := strings.TrimSpace(f.String())
+	act = strings.ReplaceAll(act, "\r\n", "\r")
+	r.Equal(exp, act)
 
 	r.Len(res.Commands, 0)
 

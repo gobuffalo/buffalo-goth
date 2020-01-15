@@ -18,4 +18,4 @@ test:
 	packr2 clean
 	$(GO_BIN) test -tags ${TAGS} ./...
 	make tidy
-
+	packr2
