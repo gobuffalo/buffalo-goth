@@ -37,7 +37,7 @@ func Test_Goth(t *testing.T) {
 
 	exp := strings.TrimSpace(authAfter)
 	act := strings.TrimSpace(f.String())
-	act = strings.ReplaceAll(act, "\r\n", "\r")
+	act = strings.ReplaceAll(act, "\r\n", "\n")
 	r.Equal(exp, act)
 
 	r.Len(res.Commands, 0)
