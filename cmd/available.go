@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/gobuffalo/buffalo-plugins/plugins"
 	"github.com/spf13/cobra"
 )
 
@@ -13,7 +12,7 @@ var availableCmd = &cobra.Command{
 	Use:   "available",
 	Short: "a list of available buffalo plugins",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		plugs := plugins.Commands{
+		plugs := Commands{
 			{Name: generateCmd.Use, BuffaloCommand: "generate", Description: generateCmd.Short, Aliases: generateCmd.Aliases},
 			{Name: authCmd.Use, BuffaloCommand: "generate", Description: authCmd.Short, Aliases: []string{}},
 		}
@@ -24,3 +23,23 @@ var availableCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(availableCmd)
 }
+
+// Command that the plugin supplies
+type Command struct {
+	// Name "foo"
+	Name string `json:"name"`
+	// UseCommand "bar"
+	UseCommand string `json:"use_command"`
+	// BuffaloCommand "generate"
+	BuffaloCommand string `json:"buffalo_command"`
+	// Description "generates a foo"
+	Description string   `json:"description,omitempty"`
+	Aliases     []string `json:"aliases,omitempty"`
+	Binary      string   `json:"-"`
+	Flags       []string `json:"flags,omitempty"`
+	// Filters events to listen to ("" or "*") is all events
+	ListenFor string `json:"listen_for,omitempty"`
+}
+
+// Commands is a slice of Command
+type Commands []Command
