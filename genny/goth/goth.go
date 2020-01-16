@@ -1,14 +1,12 @@
 package goth
 
 import (
-	"os/exec"
 	"strings"
 	"text/template"
 
-	"github.com/gobuffalo/genny"
-	"github.com/gobuffalo/genny/movinglater/gotools"
-	"github.com/gobuffalo/genny/movinglater/gotools/gomods"
-	"github.com/gobuffalo/packr"
+	"github.com/gobuffalo/genny/v2"
+	"github.com/gobuffalo/genny/v2/gogen"
+	"github.com/gobuffalo/packr/v2"
 	"github.com/pkg/errors"
 )
 
@@ -19,7 +17,7 @@ func New(opts *Options) (*genny.Generator, error) {
 		return g, errors.New("you must specify at least one provider")
 	}
 
-	if err := g.Box(packr.NewBox("../goth/templates")); err != nil {
+	if err := g.Box(packr.New("", "../goth/templates")); err != nil {
 		return g, errors.WithStack(err)
 	}
 
@@ -30,7 +28,7 @@ func New(opts *Options) (*genny.Generator, error) {
 	data := map[string]interface{}{
 		"providers": opts.Providers,
 	}
-	t := gotools.TemplateTransformer(data, h)
+	t := gogen.TemplateTransformer(data, h)
 	g.Transformer(t)
 
 	g.RunFn(func(r *genny.Runner) error {
@@ -41,7 +39,7 @@ func New(opts *Options) (*genny.Generator, error) {
 			return errors.WithStack(err)
 		}
 
-		f, err = gotools.AddImport(f, "github.com/markbates/goth/gothic")
+		f, err = gogen.AddImport(f, "github.com/markbates/goth/gothic")
 		if err != nil {
 			return errors.WithStack(err)
 		}
@@ -51,18 +49,12 @@ func New(opts *Options) (*genny.Generator, error) {
 			"auth.GET(\"/{provider}\", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))",
 			"auth.GET(\"/{provider}/callback\", AuthCallback)",
 		}
-		f, err = gotools.AddInsideBlock(f, "if app == nil {", expressions...)
+		f, err = gogen.AddInsideBlock(f, "if app == nil {", expressions...)
 		if err != nil {
 			return errors.WithStack(err)
 		}
 		return r.File(f)
 	})
-
-	pkg := "github.com/markbates/goth"
-	if !gomods.On() {
-		pkg += "/..."
-	}
-	g.Command(exec.Command(genny.GoBin(), "get", pkg))
 
 	return g, nil
 }
