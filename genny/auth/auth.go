@@ -26,7 +26,7 @@ func New(opts *Options) (*genny.Group, error) {
 
 	g = genny.New()
 
-	if err := g.Box(packr.New("", "../auth/templates")); err != nil {
+	if err := g.Box(packr.New("../auth/templates", "../auth/templates")); err != nil {
 		return gg, errors.WithStack(err)
 	}
 

@@ -17,7 +17,7 @@ func New(opts *Options) (*genny.Generator, error) {
 		return g, errors.New("you must specify at least one provider")
 	}
 
-	if err := g.Box(packr.New("", "../goth/templates")); err != nil {
+	if err := g.Box(packr.New("../goth/templates", "../goth/templates")); err != nil {
 		return g, errors.WithStack(err)
 	}
 
