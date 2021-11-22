@@ -2,17 +2,22 @@ package auth
 
 import (
 	"bytes"
+	"embed"
+	"io/fs"
 	"os/exec"
 	"strings"
 	"text/template"
 
-	"github.com/gobuffalo/buffalo-goth/genny/goth"
 	"github.com/gobuffalo/genny/v2"
 	"github.com/gobuffalo/genny/v2/gogen"
 	"github.com/gobuffalo/meta"
-	"github.com/gobuffalo/packr/v2"
 	"github.com/pkg/errors"
+
+	"github.com/gobuffalo/buffalo-goth/genny/goth"
 )
+
+//go:embed templates
+var templates embed.FS
 
 func New(opts *Options) (*genny.Group, error) {
 	gg := &genny.Group{}
@@ -24,9 +29,14 @@ func New(opts *Options) (*genny.Group, error) {
 	}
 	gg.Add(g)
 
+	sub, err := fs.Sub(templates, "templates")
+	if err != nil {
+		return gg, errors.WithStack(err)
+	}
+
 	g = genny.New()
 
-	if err := g.Box(packr.New("", "../auth/templates")); err != nil {
+	if err := g.FS(sub); err != nil {
 		return gg, errors.WithStack(err)
 	}
 

@@ -1,14 +1,18 @@
 package goth
 
 import (
+	"embed"
+	"io/fs"
 	"strings"
 	"text/template"
 
 	"github.com/gobuffalo/genny/v2"
 	"github.com/gobuffalo/genny/v2/gogen"
-	"github.com/gobuffalo/packr/v2"
 	"github.com/pkg/errors"
 )
+
+//go:embed templates
+var templates embed.FS
 
 func New(opts *Options) (*genny.Generator, error) {
 	g := genny.New()
@@ -17,7 +21,11 @@ func New(opts *Options) (*genny.Generator, error) {
 		return g, errors.New("you must specify at least one provider")
 	}
 
-	if err := g.Box(packr.New("", "../goth/templates")); err != nil {
+	sub, err := fs.Sub(templates, "templates")
+	if err != nil {
+		return g, errors.WithStack(err)
+	}
+	if err := g.FS(sub); err != nil {
 		return g, errors.WithStack(err)
 	}
 
