@@ -3,8 +3,9 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/gobuffalo/buffalo-goth/goth"
 	"github.com/spf13/cobra"
+
+	"github.com/gobuffalo/buffalo-goth/goth"
 )
 
 // versionCmd represents the version command
@@ -18,5 +19,5 @@ var versionCmd = &cobra.Command{
 }
 
 func init() {
-	gothCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(versionCmd)
 }

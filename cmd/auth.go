@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"context"
+	"os/exec"
 
 	"github.com/gobuffalo/buffalo-goth/genny/auth"
 	"github.com/gobuffalo/genny/v2"
@@ -42,12 +43,16 @@ var authCmd = &cobra.Command{
 		}
 		r.With(g)
 
+		g = genny.New()
+		gomodtidy := exec.Command("go", "mod", "tidy")
+		g.Command(gomodtidy)
+		r.With(g)
+
 		return r.Run()
 	},
 }
 
 func init() {
 	authCmd.Flags().BoolVarP(&authOptions.dryRun, "dry-run", "d", false, "run the generator without creating files or running commands")
-	gothCmd.AddCommand(authCmd)
 	rootCmd.AddCommand(authCmd)
 }
