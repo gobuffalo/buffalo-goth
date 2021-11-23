@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"context"
+	"os/exec"
 
 	"github.com/gobuffalo/buffalo-goth/genny/goth"
 	"github.com/gobuffalo/genny/v2"
@@ -17,7 +18,8 @@ var generateOptions = struct {
 	Options: &goth.Options{},
 }
 
-// generateCmd represents the generate command
+// generateCmd represents the goth command
+// TODO: rename it, rename the file
 var generateCmd = &cobra.Command{
 	Use:   "goth",
 	Short: "generates a actions/auth.go file configured to the specified providers.",
@@ -42,12 +44,16 @@ var generateCmd = &cobra.Command{
 		}
 		r.With(g)
 
+		g = genny.New()
+		gomodtidy := exec.Command("go", "mod", "tidy")
+		g.Command(gomodtidy)
+		r.With(g)
+
 		return r.Run()
 	},
 }
 
 func init() {
 	generateCmd.Flags().BoolVarP(&generateOptions.dryRun, "dry-run", "d", false, "run the generator without creating files or running commands")
-	gothCmd.AddCommand(generateCmd)
 	rootCmd.AddCommand(generateCmd)
 }
