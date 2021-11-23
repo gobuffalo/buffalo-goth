@@ -1,3 +1,3 @@
 package goth
 
-const Version = "v0.0.0"
+var Version = "v0.0.0"
