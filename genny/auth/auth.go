@@ -3,6 +3,7 @@ package auth
 import (
 	"bytes"
 	"embed"
+	"fmt"
 	"io/fs"
 	"os/exec"
 	"strings"
@@ -11,7 +12,6 @@ import (
 	"github.com/gobuffalo/genny/v2"
 	"github.com/gobuffalo/genny/v2/gogen"
 	"github.com/gobuffalo/meta"
-	"github.com/pkg/errors"
 
 	"github.com/gobuffalo/buffalo-goth/genny/goth"
 )
@@ -25,19 +25,19 @@ func New(opts *Options) (*genny.Group, error) {
 		Providers: opts.Providers,
 	})
 	if err != nil {
-		return gg, errors.WithStack(err)
+		return gg, err
 	}
 	gg.Add(g)
 
 	sub, err := fs.Sub(templates, "templates")
 	if err != nil {
-		return gg, errors.WithStack(err)
+		return gg, fmt.Errorf("failed to get subtree of templates: %w", err)
 	}
 
 	g = genny.New()
 
 	if err := g.FS(sub); err != nil {
-		return gg, errors.WithStack(err)
+		return gg, fmt.Errorf("failed to add subtree: %w", err)
 	}
 
 	h := template.FuncMap{
@@ -59,7 +59,7 @@ func New(opts *Options) (*genny.Group, error) {
 
 		f, err := r.FindFile(path)
 		if err != nil {
-			return errors.WithStack(err)
+			return fmt.Errorf("setup goth: %w", err)
 		}
 
 		bb := &bytes.Buffer{}

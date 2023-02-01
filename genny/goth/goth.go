@@ -53,9 +53,13 @@ func New(opts *Options) (*genny.Generator, error) {
 		}
 
 		expressions := []string{
+			"",
+			"// NOTE: this block should go before any resources",
+			"// that need to be protected by buffalo-goth!",
 			"auth := app.Group(\"/auth\")",
 			"auth.GET(\"/{provider}\", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))",
 			"auth.GET(\"/{provider}/callback\", AuthCallback)",
+			"",
 		}
 
 		f, err = gogen.AddInsideBlock(f, "appOnce.Do(func() {", expressions...)

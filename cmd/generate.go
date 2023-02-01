@@ -2,12 +2,12 @@ package cmd
 
 import (
 	"context"
+	"fmt"
 	"os/exec"
 
 	"github.com/gobuffalo/buffalo-goth/genny/goth"
 	"github.com/gobuffalo/genny/v2"
 	"github.com/gobuffalo/genny/v2/gogen"
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -34,13 +34,13 @@ var generateCmd = &cobra.Command{
 		opts.Providers = args
 		g, err := goth.New(opts)
 		if err != nil {
-			return errors.WithStack(err)
+			return err
 		}
 		r.With(g)
 
 		g, err = gogen.Fmt(r.Root)
 		if err != nil {
-			return errors.WithStack(err)
+			return fmt.Errorf("formatting error: %w", err)
 		}
 		r.With(g)
 
