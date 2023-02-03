@@ -2,18 +2,20 @@ package actions
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
+	"{{.app.ModelsPkg}}"
+
 	"github.com/gobuffalo/buffalo"
-  "{{.app.ModelsPkg}}"
-	"github.com/markbates/going/defaults"
+	"github.com/gobuffalo/nulls"
+	"github.com/gobuffalo/pop/v6"
+	"github.com/gobuffalo/x/defaults"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	{{range .providers -}}
 	"github.com/markbates/goth/providers/{{ downcase . }}"
-  {{end -}}
-	"github.com/gobuffalo/pop/v6"
-	"github.com/gobuffalo/nulls"
+	{{end -}}
 	"github.com/pkg/errors"
 )
 
@@ -30,7 +32,7 @@ func init() {
 func AuthCallback(c buffalo.Context) error {
 	gu, err := gothic.CompleteUserAuth(c.Response(), c.Request())
 	if err != nil {
-		return c.Error(401, err)
+		return c.Error(http.StatusUnauthorized, err)
 	}
 	tx := c.Value("tx").(*pop.Connection)
 	q := tx.Where("provider = ? and provider_id = ?", gu.Provider, gu.UserID)
@@ -58,13 +60,13 @@ func AuthCallback(c buffalo.Context) error {
 	}
 
 	c.Flash().Add("success", "You have been logged in")
-	return c.Redirect(302, "/")
+	return c.Redirect(http.StatusFound, "/")
 }
 
 func AuthDestroy(c buffalo.Context) error {
 	c.Session().Clear()
 	c.Flash().Add("success", "You have been logged out")
-	return c.Redirect(302, "/")
+	return c.Redirect(http.StatusFound, "/")
 }
 
 func SetCurrentUser(next buffalo.Handler) buffalo.Handler {
@@ -85,7 +87,7 @@ func Authorize(next buffalo.Handler) buffalo.Handler {
 	return func(c buffalo.Context) error {
 		if uid := c.Session().Get("current_user_id"); uid == nil {
 			c.Flash().Add("danger", "You must be authorized to see that page")
-			return c.Redirect(302, "/")
+			return c.Redirect(http.StatusFound, "/")
 		}
 		return next(c)
 	}

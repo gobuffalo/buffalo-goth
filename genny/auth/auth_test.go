@@ -68,6 +68,9 @@ var app *buffalo.App
 func App() *buffalo.App {
 	if app == nil {
 		app = buffalo.New(buffalo.Options{})
+		
+		// NOTE: this block should go before any resources
+		// that need to be protected by buffalo-goth!
 		auth := app.Group("/auth")
 		app.Use(SetCurrentUser)
 		app.Use(Authorize)
@@ -77,6 +80,7 @@ func App() *buffalo.App {
 		auth.DELETE("", AuthDestroy)
 		auth.Middleware.Skip(Authorize, bah, AuthCallback)
 		auth.GET("/{provider}/callback", AuthCallback)
+		
 	}
 
 	return app

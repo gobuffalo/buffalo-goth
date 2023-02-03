@@ -73,9 +73,13 @@ var app *buffalo.App
 func App() *buffalo.App {
 	if app == nil {
 		app = buffalo.New(buffalo.Options{})
+		
+		// NOTE: this block should go before any resources
+		// that need to be protected by buffalo-goth!
 		auth := app.Group("/auth")
 		auth.GET("/{provider}", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))
 		auth.GET("/{provider}/callback", AuthCallback)
+		
 	}
 
 	return app
@@ -85,14 +89,15 @@ const authAfter = `package actions
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/github"
-  "github.com/markbates/goth/providers/twitter"
-  )
+	"github.com/markbates/goth/providers/twitter"
+	)
 
 func init() {
 	gothic.Store = App().SessionStore
@@ -106,9 +111,9 @@ func init() {
 func AuthCallback(c buffalo.Context) error {
 	user, err := gothic.CompleteUserAuth(c.Response(), c.Request())
 	if err != nil {
-		return c.Error(401, err)
+		return c.Error(http.StatusUnauthorized, err)
 	}
 	// Do something with the user, maybe register them/sign them in
-	return c.Render(200, r.JSON(user))
+	return c.Render(http.StatusOK, r.JSON(user))
 }
 `

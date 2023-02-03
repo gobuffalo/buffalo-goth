@@ -2,6 +2,7 @@ package actions
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"github.com/gobuffalo/buffalo"
@@ -9,7 +10,7 @@ import (
 	"github.com/markbates/goth/gothic"
 	{{range .providers -}}
 	"github.com/markbates/goth/providers/{{ downcase . }}"
-  {{end -}}
+	{{end -}}
 )
 
 func init() {
@@ -29,8 +30,8 @@ func init() {
 func AuthCallback(c buffalo.Context) error {
 	user, err := gothic.CompleteUserAuth(c.Response(), c.Request())
 	if err != nil {
-		return c.Error(401, err)
+		return c.Error(http.StatusUnauthorized, err)
 	}
 	// Do something with the user, maybe register them/sign them in
-	return c.Render(200, r.JSON(user))
+	return c.Render(http.StatusOK, r.JSON(user))
 }

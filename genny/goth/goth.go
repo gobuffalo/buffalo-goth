@@ -2,13 +2,13 @@ package goth
 
 import (
 	"embed"
+	"fmt"
 	"io/fs"
 	"strings"
 	"text/template"
 
 	"github.com/gobuffalo/genny/v2"
 	"github.com/gobuffalo/genny/v2/gogen"
-	"github.com/pkg/errors"
 )
 
 //go:embed templates
@@ -18,15 +18,15 @@ func New(opts *Options) (*genny.Generator, error) {
 	g := genny.New()
 
 	if len(opts.Providers) == 0 {
-		return g, errors.New("you must specify at least one provider")
+		return g, fmt.Errorf("you must specify at least one provider")
 	}
 
 	sub, err := fs.Sub(templates, "templates")
 	if err != nil {
-		return g, errors.WithStack(err)
+		return g, fmt.Errorf("failed to get subtree of templates: %w", err)
 	}
 	if err := g.FS(sub); err != nil {
-		return g, errors.WithStack(err)
+		return g, fmt.Errorf("failed to add subtree: %w", err)
 	}
 
 	h := template.FuncMap{
@@ -44,22 +44,41 @@ func New(opts *Options) (*genny.Generator, error) {
 
 		f, err := r.FindFile(path)
 		if err != nil {
-			return errors.WithStack(err)
+			return fmt.Errorf("setup goth: %w", err)
 		}
 
 		f, err = gogen.AddImport(f, "github.com/markbates/goth/gothic")
 		if err != nil {
-			return errors.WithStack(err)
+			return fmt.Errorf("could not add import: %w", err)
 		}
 
 		expressions := []string{
+			"",
+			"// NOTE: this block should go before any resources",
+			"// that need to be protected by buffalo-goth!",
 			"auth := app.Group(\"/auth\")",
 			"auth.GET(\"/{provider}\", buffalo.WrapHandlerFunc(gothic.BeginAuthHandler))",
 			"auth.GET(\"/{provider}/callback\", AuthCallback)",
+			"",
 		}
-		f, err = gogen.AddInsideBlock(f, "if app == nil {", expressions...)
+
+		f, err = gogen.AddInsideBlock(f, "appOnce.Do(func() {", expressions...)
 		if err != nil {
-			return errors.WithStack(err)
+			if strings.Contains(err.Error(), "could not find desired block") {
+				// TODO: remove this block some day soon
+				// add this block for compatibility with the apps built with
+				// the old version of Buffalo CLI (v0.18.8 or older)
+				f, err = gogen.AddInsideBlock(f, "if app == nil {", expressions...)
+				if err != nil {
+					if err != nil {
+						return fmt.Errorf("could not add a code block: %w", err)
+					} else {
+						r.Logger.Warnf("This app was built with CLI v0.18.8 or older. See https://gobuffalo.io/documentation/known-issues/#cli-v0.18.8")
+					}
+				}
+			} else {
+				return fmt.Errorf("could not add a code block: %w", err)
+			}
 		}
 		return r.File(f)
 	})

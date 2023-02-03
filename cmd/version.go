@@ -11,9 +11,9 @@ import (
 // versionCmd represents the version command
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "current version of goth",
+	Short: "current version of buffalo-goth",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		fmt.Println("goth", goth.Version)
+		fmt.Println("buffalo-goth", goth.Version)
 		return nil
 	},
 }
